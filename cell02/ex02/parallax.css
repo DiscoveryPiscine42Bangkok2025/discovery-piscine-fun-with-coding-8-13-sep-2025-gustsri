@@ -1,0 +1,172 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+/* First parallax section */
+.parallax-section1 {
+    height: 100vh;
+    background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.parallax-section1::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* Second parallax section */
+.parallax-section2 {
+    height: 100vh;
+    background-image: url('https://images.unsplash.com/photo-1519904981063-b0cf448d479e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.parallax-section2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Message boxes */
+.message-box {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    margin: 0 20px;
+}
+
+.parallax-section2 .message-box {
+    background: rgba(52, 73, 94, 0.95);
+    color: white;
+    border: 2px solid #ecf0f1;
+}
+
+.message-box h1 {
+    color: #2c3e50;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.message-box h2 {
+    font-size: 2.2em;
+    margin-bottom: 20px;
+    color: #ecf0f1;
+}
+
+.message-box p {
+    color: #34495e;
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+.parallax-section2 .message-box p {
+    color: #bdc3c7;
+}
+
+/* Content section */
+.content-section {
+    padding: 100px 50px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    text-align: center;
+    color: white;
+}
+
+.content-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.content-section p {
+    font-size: 1.3em;
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto 40px;
+}
+
+.scroll-indicator {
+    font-size: 1.1em;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Footer section */
+.footer-section {
+    padding: 60px 50px;
+    background: #2c3e50;
+    color: #ecf0f1;
+    text-align: center;
+}
+
+.footer-section h3 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.footer-section p {
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .message-box {
+        margin: 20px;
+        padding: 30px;
+    }
+    
+    .message-box h1 {
+        font-size: 2em;
+    }
+    
+    .content-section, .footer-section {
+        padding: 60px 30px;
+    }
+}
