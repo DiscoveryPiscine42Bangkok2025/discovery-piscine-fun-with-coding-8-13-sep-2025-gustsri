@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kanitphong Sricharoen 2.0- Portfolio</title>
+    <title>Kanitphong Sricharoen - Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .gradient-text {
@@ -15,14 +15,121 @@
         }
 
         .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Staggered animation delays */
+        .fade-in-up:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .fade-in-up:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .fade-in-up:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .fade-in-up:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        /* Mobile menu toggle using CSS only */
+        .mobile-menu-toggle {
+            display: none;
+        }
+
+        .mobile-menu-toggle:checked+.mobile-menu-button .menu-icon {
+            transform: rotate(45deg);
+        }
+
+        .mobile-menu-toggle:checked+.mobile-menu-button .menu-icon::before {
+            transform: rotate(90deg);
+            top: 0;
+        }
+
+        .mobile-menu-toggle:checked+.mobile-menu-button .menu-icon::after {
+            transform: rotate(90deg);
+            bottom: 0;
+        }
+
+        .mobile-menu-toggle:checked~.mobile-menu {
+            display: block !important;
+        }
+
+        .menu-icon {
+            position: relative;
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: currentColor;
+            transition: all 0.3s ease;
+        }
+
+        .menu-icon::before,
+        .menu-icon::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 24px;
+            height: 2px;
+            background: currentColor;
+            transition: all 0.3s ease;
+        }
+
+        .menu-icon::before {
+            top: -8px;
+        }
+
+        .menu-icon::after {
+            bottom: -8px;
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Scroll-triggered animations using intersection observer via CSS */
+        .scroll-animate {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
 
-        .fade-in-up.show {
+        .scroll-animate.in-view {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* Navigation background change on scroll - using backdrop-filter */
+        nav {
+            backdrop-filter: blur(20px);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Hover effects */
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -52,25 +159,28 @@
 
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-gray-700 hover:text-purple-600 focus:outline-none">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
+                    <input type="checkbox" id="mobile-menu-toggle" class="mobile-menu-toggle">
+                    <label for="mobile-menu-toggle"
+                        class="mobile-menu-button text-gray-700 hover:text-purple-600 cursor-pointer">
+                        <span class="menu-icon"></span>
+                    </label>
 
-            <!-- Mobile Navigation Menu -->
-            <div id="mobile-menu" class="hidden md:hidden pb-4">
-                <a href="index.html"
-                    class="block py-2 text-gray-700 hover:text-purple-600 transition-colors duration-200">Home</a>
-                <a href="#about" class="block py-2 text-purple-600 font-bold transition-colors duration-200">About
-                    Me</a>
-                <a href="#showcase"
-                    class="block py-2 text-gray-700 hover:text-purple-600 transition-colors duration-200">My Work</a>
-                <a href="#contact"
-                    class="block py-2 text-gray-700 hover:text-purple-600 transition-colors duration-200">Contact</a>
+                    <!-- Mobile Navigation Menu -->
+                    <div class="mobile-menu hidden absolute top-full left-0 right-0 bg-white shadow-lg border-t">
+                        <div class="px-4 py-4 space-y-2">
+                            <a href="index.html"
+                                class="block py-2 text-gray-700 hover:text-purple-600 transition-colors duration-200">Home</a>
+                            <a href="#about"
+                                class="block py-2 text-purple-600 font-bold transition-colors duration-200">About
+                                Me</a>
+                            <a href="#showcase"
+                                class="block py-2 text-gray-700 hover:text-purple-600 transition-colors duration-200">My
+                                Work</a>
+                            <a href="#contact"
+                                class="block py-2 text-gray-700 hover:text-purple-600 transition-colors duration-200">Contact</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -111,19 +221,18 @@
                 <div class="w-24 h-1 bg-blue-600 mx-auto"></div>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-12 items-center">
+            <!-- First Grid Row: Photo and Introduction -->
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
                 <div class="fade-in-up">
-
                     <div
-                        class="w-80 h-80 mx-auto bg-gradient-to-br from-blue-400 to-indigo-600 rounded-2xl flex items-center justify-center shadow-2xl">
-                        <div class="w-72 h-72 bg-white rounded-2xl flex items-center justify-center">
+                        class="w-80 h-80 mx-auto bg-gradient-to-br from-blue-400 to-indigo-600 rounded-full flex items-center justify-center shadow-2xl">
+                        <div class="w-72 h-72 bg-white rounded-full flex items-center justify-center">
                             <div class="text-6xl">
-                                <img src="/cell04/img/IMG_0028.JPG" alt="Kanitphong Sricharoen"
-                                    class="w-72 h-72 rounded-2xl object-cover">
+                                <img src="/rush/img/IMG_0028.JPG" alt="Kanitphong Sricharoen"
+                                    class="w-72 h-72 rounded-full object-cover">
                             </div>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="fade-in-up">
@@ -134,62 +243,88 @@
                         technologies, programming languages, and development methodologies to continuously improve and
                         apply them effectively in my work.
                     </p>
+                </div>
+            </div>
 
-                    <div class="mb-8">
-                        <h3 class="text-3xl font-bold text-gray-900 mb-6">Background Education</h3>
+
+            <div class="grid md:grid-cols-2 gap-12 items-start">
+                <div class="fade-in-up">
+                    <h3 class="text-3xl font-bold text-gray-900 mb-6">Background Education</h3>
+                    <ul class="list-disc list-inside text-lg text-gray-600 space-y-2">
+
+                        <h4 class="text-2xl font-bold text-gray-900 mt-8 mb-2">Higher Education</h4>
                         <ul class="list-disc list-inside text-lg text-gray-600 space-y-2">
+                            <li>
+                                <span class="font-semibold">2021 - Present:</span> Bachelor's Degree in Information
+                                Technology at King Mongkut's Institute of Technology Ladkrabang (KMITL)
+                            </li>
+                            <li>
+                                <span class="font-semibold">Bachelor's Degree:</span> Information Technology
+                            </li>
+                            <li>
+                                <span class="font-semibold">Location:</span> Bangkok, Thailand
+                            </li>
+                        </ul>
+                        <h4 class="text-2xl font-bold text-gray-900 mt-8 mb-2">Secondary Education</h4>
+                        <ul class="list-disc list-inside text-lg text-gray-600 space-y-2">
+                            <li>
+                                <span class="font-semibold">School:</span> Benchamarachutit School, Ratchaburi
+                            </li>
+                            <li>
+                                Lower Secondary Education (Matthayom 1-3)
+                            </li>
+                            <li>
+                                Upper Secondary Education (Matthayom 4-6)
+                            </li>
+                            <li>
+                                <span class="font-semibold">Location:</span> Ratchaburi Province, Thailand
+                            </li>
+                        </ul>
+                        <h4 class="text-2xl font-bold text-gray-900 mt-8 mb-2">Primary Education</h4>
+                        <ul class="list-disc list-inside text-lg text-gray-600 space-y-2">
+                            <li>
+                                <span class="font-semibold">School:</span> Anuban Ratchaburi School
+                            </li>
+                            <li>
+                                Kindergarten (Anuban)
+                            </li>
+                            <li>
+                                Lower Primary Education (Prathom 1-3)
+                            </li>
+                            <li>
+                                Upper Primary Education (Prathom 4-6)
+                            </li>
+                            <li>
+                                <span class="font-semibold">Location:</span> Ratchaburi Province, Thailand
+                            </li>
+                        </ul>
 
-                            <h4 class="text-2xl font-bold text-gray-900 mt-8 mb-2">Higher Education</h4>
-                            <ul class="list-disc list-inside text-lg text-gray-600 space-y-2">
-                                <li>
-                                    <span class="font-semibold">2021 - Present:</span> Bachelor's Degree in Information
-                                    Technology at King Mongkut's Institute of Technology Ladkrabang (KMITL)
-                                </li>
-                                <li>
-                                    <span class="font-semibold">Bachelor's Degree:</span> Information Technology
-                                </li>
-                                <li>
-                                    <span class="font-semibold">Location:</span> Bangkok, Thailand
-                                </li>
-                            </ul>
-                            <h4 class="text-2xl font-bold text-gray-900 mt-8 mb-2">Secondary Education</h4>
-                            <ul class="list-disc list-inside text-lg text-gray-600 space-y-2">
-                                <li>
-                                    <span class="font-semibold">School:</span> Benchamarachutit School, Ratchaburi
-                                </li>
-                                <li>
-                                    Lower Secondary Education (Matthayom 1-3)
-                                </li>
-                                <li>
-                                    Upper Secondary Education (Matthayom 4-6)
-                                </li>
-                                <li>
-                                    <span class="font-semibold">Location:</span> Ratchaburi Province, Thailand
-                                </li>
-                            </ul>
-                            <h4 class="text-2xl font-bold text-gray-900 mt-8 mb-2">Primary Education</h4>
-                            <ul class="list-disc list-inside text-lg text-gray-600 space-y-2">
-                                <li>
-                                    <span class="font-semibold">School:</span> Anuban Ratchaburi School
-                                </li>
-                                <li>
-                                    Kindergarten (Anuban)
-                                </li>
-                                <li>
-                                    Lower Primary Education (Prathom 1-3)
-                                </li>
-                                <li>
-                                    Upper Primary Education (Prathom 4-6)
-                                </li>
-                                <li>
-                                    <span class="font-semibold">Location:</span> Ratchaburi Province, Thailand
-                                </li>
-                            </ul>
-                    </div>
+                </div>
 
+                <div class="fade-in-up">
+                    <h3 class="text-3xl font-bold text-gray-900 mb-6">My Favorite Hobbies</h3>
                     <p class="text-lg text-gray-600 mb-8 leading-relaxed">
-                    <h3 class="text-3xl font-bold text-gray-900 mb-6">My favorite hobbies</h3>
-                    Watching animes, playing games, traveling, exercising, and hanging out with friends.
+                    <ul class="list-disc list-inside text-lg text-gray-600 space-y-2">
+                        <li>
+                            <span class="font-semibold">Watching animes</span>
+                        </li>
+                        <li>
+                            <span class="font-semibold">Playing games</span>
+                        </li>
+                        <li>
+                            <span class="font-semibold">Traveling</span>
+                        </li>
+                        <li>
+                            <span class="font-semibold">Exercising</span>
+                        </li>
+                        <li>
+                            <span class="font-semibold">hanging out with friends.</span>
+                        </li>
+                        <li>
+                            <span class="font-semibold">Exercising</span>
+                        </li>
+                    </ul>
+
                     </p>
                 </div>
             </div>
@@ -207,76 +342,64 @@
                 <h3 class="text-3xl font-bold text-gray-900 mb-6">My Skills</h3>
 
                 <div class="grid grid-cols-2 gap-4">
-                    <div class="bg-white p-4 rounded-lg shadow-sm border">
+                    <div class="bg-white p-4 rounded-lg shadow-sm border hover-lift">
                         <h4 class="font-semibold text-gray-900 mb-2">Programming Languages</h4>
                         <p class="text-gray-600">PHP, HTML, CSS, Python, SQL, TypeScript, JavaScript</p>
                     </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm border">
+                    <div class="bg-white p-4 rounded-lg shadow-sm border hover-lift">
                         <h4 class="font-semibold text-gray-900 mb-2">Frameworks & Libraries</h4>
                         <p class="text-gray-600">Django, Bootstrap, React, Next.js, Prisma, Tailwind CSS</p>
                     </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm border">
+                    <div class="bg-white p-4 rounded-lg shadow-sm border hover-lift">
                         <h4 class="font-semibold text-gray-900 mb-2">Tools & Platforms</h4>
                         <p class="text-gray-600">GitHub, Postman, Docker, Figma, AWS</p>
                     </div>
-                    <div class="bg-white p-4 rounded-lg shadow-sm border">
+                    <div class="bg-white p-4 rounded-lg shadow-sm border hover-lift">
                         <h4 class="font-semibold text-gray-900 mb-2">Database Management</h4>
                         <p class="text-gray-600">MySQL, PostgreSQL, MongoDB, NoSQL</p>
                     </div>
                 </div>
-
-
             </div>
+
             <h3 class="text-3xl text-center font-bold text-gray-900 mb-6">My Mini Projects</h3>
             <div class="grid md:grid-cols-3 gap-8">
 
                 <div
-                    class="bg-gray-50 border border-gray-200 p-8 rounded-xl hover:shadow-xl transition-shadow duration-300 fade-in-up">
-                    <!-- <div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
-                        <div class="text-3xl"></div>
-                    </div> -->
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Game-Vault</h3>
-                    <p class="text-gray-600 mb-4">A web platform for displaying game-related information, individual
-                        game details, user accounts, and a commenting system for discussing games. Developed using
-                        React, Next.js, TypeScript, Tailwind CSS, and Prisma, with external APIs integrated to fetch and
-                        display game data.</p>
+                    class="bg-gray-50 border border-gray-200 p-8 rounded-xl hover-lift transition-shadow duration-300 fade-in-up">
+                    <div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
+                        <div class="text-3xl">🌐</div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Frontend Development</h3>
+                    <p class="text-gray-600 mb-4">Expert in React, Vue.js, and modern JavaScript frameworks.</p>
                     <div class="flex flex-wrap gap-2">
                         <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">React</span>
-                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Next.js</span>
                         <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">TypeScript</span>
-                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Tailwind CSS</span>
-                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Prisma</span>
                     </div>
                 </div>
 
                 <div
-                    class="bg-gray-50 border border-gray-200 p-8 rounded-xl hover:shadow-xl transition-shadow duration-300 fade-in-up">
-                    <!-- <div class="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center mb-6">
+                    class="bg-gray-50 border border-gray-200 p-8 rounded-xl hover-lift transition-shadow duration-300 fade-in-up">
+                    <div class="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center mb-6">
                         <div class="text-3xl">⚙️</div>
-                    </div> -->
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">U_sa_bai</h3>
-                    <p class="text-gray-600 mb-4">A dormitory management system that handles room reservations, rent
-                        payments (including water and electricity bills), and service requests such as maintenance,
-                        cleaning, or lodging complaints. The system is designed to enhance convenience for tenants and
-                        administrators. Developed using Laravel and NoSQL.</p>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Backend Development</h3>
+                    <p class="text-gray-600 mb-4">Proficient in Node.js, Python, and database management.</p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Laravel</span>
-                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">NoSQL</span>
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Node.js</span>
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">MongoDB</span>
                     </div>
                 </div>
 
                 <div
-                    class="bg-gray-50 border border-gray-200 p-8 rounded-xl hover:shadow-xl transition-shadow duration-300 fade-in-up">
-                    <!-- <div class="w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
+                    class="bg-gray-50 border border-gray-200 p-8 rounded-xl hover-lift transition-shadow duration-300 fade-in-up">
+                    <div class="w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
                         <div class="text-3xl">☁️</div>
-                    </div> -->
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Accounting and Store Management System</h3>
-                    <p class="text-gray-600 mb-4">A system for managing store inventory and employee accounts. The
-                        project was developed from scratch, starting with requirements gathering, analysis, and creating
-                        use cases. Developed using Django and PostgreSQL.</p>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Cloud & DevOps</h3>
+                    <p class="text-gray-600 mb-4">Experience with AWS, Docker, and CI/CD pipelines.</p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Django</span>
-                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">PostgreSQL</span>
+                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">AWS</span>
+                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Docker</span>
                     </div>
                 </div>
             </div>
@@ -294,38 +417,35 @@
 
             <div class="max-w-2xl mx-auto text-center">
                 <div class="grid md:grid-cols-4 gap-8">
-                    <div class="text-center fade-in-up">
+                    <div class="text-center fade-in-up hover-lift">
                         <div class="w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                            <div class="text-2xl"><img src="/cell04/img/email.png" class="w-10 h-10 object-contain">
-                            </div>
+                            <div class="text-2xl"><img src="/rush/img/email.png" alt="Email"></div>
                         </div>
                         <h4 class="font-semibold text-gray-900 mb-2">Email</h4>
                         <a href="mailto:gustsri@email.com"
                             class="text-blue-600 hover:text-blue-800">gustsri@email.com</a>
                     </div>
 
-                    <div class="text-center fade-in-up">
+                    <div class="text-center fade-in-up hover-lift">
                         <div class="w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                            <div class="text-2xl"><img src="/cell04/img/facebook.svg" class="w-10 h-10 object-contain">
-                            </div>
+                            <div class="text-2xl"><img src="/rush/img/facebook.svg" alt="Facebook"></div>
                         </div>
                         <h4 class="font-semibold text-gray-900 mb-2">Facebook</h4>
                         <a href="https://web.facebook.com/gus.kanitphong.sricharoen"
                             class="text-blue-600 hover:text-blue-800">kanitphong Sricharoen</a>
                     </div>
 
-                    <div class="text-center fade-in-up">
+                    <div class="text-center fade-in-up hover-lift">
                         <div class="w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                            <div class="text-2xl"><img src="/cell04/img/Github.png" class="w-10 h-10 object-contain">
-                            </div>
+                            <div class="text-2xl"><img src="/rush/img/Github.png" alt="GitHub"></div>
                         </div>
                         <h4 class="font-semibold text-gray-900 mb-2">GitHub</h4>
                         <a href="https://github.com/gustsri" class="text-blue-600 hover:text-blue-800">gustsri</a>
                     </div>
 
-                    <div class="text-center fade-in-up">
+                    <div class="text-center fade-in-up hover-lift">
                         <div class="w-32 h-16 flex items-center justify-center mx-auto mb-4">
-                            <div class="text-2xl"><img src="/cell04/img/IG.png" class="w-10 h-10 object-contain"></div>
+                            <div class="text-2xl"><img src="/rush/img/IG.png" alt="Instagram"></div>
                         </div>
                         <h4 class="font-semibold text-gray-900 mb-2">Instagram</h4>
                         <a href="https://www.instagram.com/ag.niphong/"
@@ -336,62 +456,6 @@
             </div>
         </div>
     </section>
-
-    <script>
-        // Mobile menu toggle
-        document.getElementById('mobile-menu-button').addEventListener('click', function () {
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Fade in animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('show');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in-up').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const headerOffset = 80;
-                    const elementPosition = target.offsetTop;
-                    const offsetPosition = elementPosition - headerOffset;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Navigation background change on scroll
-        window.addEventListener('scroll', function () {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.classList.add('bg-white/95', 'shadow-lg');
-                nav.classList.remove('bg-white/90');
-            } else {
-                nav.classList.add('bg-white/90');
-                nav.classList.remove('bg-white/95', 'shadow-lg');
-            }
-        });
-    </script>
 
 </body>
 
