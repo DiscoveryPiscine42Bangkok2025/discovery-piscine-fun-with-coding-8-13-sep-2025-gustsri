@@ -23,6 +23,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -34,9 +35,12 @@
         }
 
         @keyframes float {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0px);
             }
+
             50% {
                 transform: translateY(-10px);
             }
@@ -47,21 +51,21 @@
             display: none;
         }
 
-        .mobile-menu-toggle:checked + .mobile-menu-button .menu-icon {
+        .mobile-menu-toggle:checked+.mobile-menu-button .menu-icon {
             transform: rotate(45deg);
         }
 
-        .mobile-menu-toggle:checked + .mobile-menu-button .menu-icon::before {
+        .mobile-menu-toggle:checked+.mobile-menu-button .menu-icon::before {
             transform: rotate(90deg);
             top: 0;
         }
 
-        .mobile-menu-toggle:checked + .mobile-menu-button .menu-icon::after {
+        .mobile-menu-toggle:checked+.mobile-menu-button .menu-icon::after {
             transform: rotate(90deg);
             bottom: 0;
         }
 
-        .mobile-menu-toggle:checked ~ .mobile-menu {
+        .mobile-menu-toggle:checked~.mobile-menu {
             display: block !important;
         }
 
@@ -135,10 +139,11 @@
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden">
                     <input type="checkbox" id="mobile-menu-toggle" class="mobile-menu-toggle">
-                    <label for="mobile-menu-toggle" class="mobile-menu-button text-gray-700 hover:text-purple-600 cursor-pointer">
+                    <label for="mobile-menu-toggle"
+                        class="mobile-menu-button text-gray-700 hover:text-purple-600 cursor-pointer">
                         <span class="menu-icon"></span>
                     </label>
-                    
+
                     <!-- Mobile Navigation Menu -->
                     <div class="mobile-menu hidden absolute top-full left-0 right-0 bg-white shadow-lg border-t">
                         <div class="px-4 py-4 space-y-2">
@@ -172,12 +177,15 @@
             <!-- Portfolio Cards -->
             <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                 <!-- Kanitphong Sricharoen Card -->
-                <a href="kanitphong.html" 
-                   class="block bg-gray-50 border border-gray-200 rounded-2xl p-8 card-hover cursor-pointer float-animation">
+                <a href="kanitphong.html"
+                    class="block bg-gray-50 border border-gray-200 rounded-2xl p-8 card-hover cursor-pointer float-animation">
                     <div class="text-center">
                         <div
                             class="w-32 h-32 mx-auto bg-gradient-to-br from-blue-400 to-purple-600 rounded-full flex items-center justify-center mb-6 shadow-2xl">
-                            <div class="text-6xl">👨‍💻</div>
+                            <div class="text-6xl">
+                                <img src="/cell04/img/IMG_0028.JPG" class="w-28 h-28 rounded-full object-cover mx-auto"
+                                    alt="Profile">
+                            </div>
                         </div>
                         <h3 class="text-3xl font-bold mb-4 text-gray-900">Kanitphong Sricharoen</h3>
                         <p class="text-lg text-gray-600 mb-6">
@@ -198,13 +206,16 @@
                 </a>
 
                 <!-- Jessada Taengsuwan Card -->
-                <a href="jessada.html" 
-                   class="block bg-gray-50 border border-gray-200 rounded-2xl p-8 card-hover cursor-pointer float-animation"
-                   style="animation-delay: 0.2s;">
+                <a href="jessada.html"
+                    class="block bg-gray-50 border border-gray-200 rounded-2xl p-8 card-hover cursor-pointer float-animation"
+                    style="animation-delay: 0.2s;">
                     <div class="text-center">
                         <div
                             class="w-32 h-32 mx-auto bg-gradient-to-br from-pink-400 to-purple-600 rounded-full flex items-center justify-center mb-6 shadow-2xl">
-                            <div class="text-6xl">👩‍🎨</div>
+                            <div class="text-6xl">
+                                <img src="/cell04/img/IMG_0028.JPG" class="w-28 h-28 rounded-full object-cover mx-auto"
+                                    alt="Profile">
+                            </div>
                         </div>
                         <h3 class="text-3xl font-bold mb-4 text-gray-900">Jessada Taengsuwan</h3>
                         <p class="text-lg text-gray-600 mb-6">
@@ -226,4 +237,5 @@
     </section>
 
 </body>
+
 </html>
