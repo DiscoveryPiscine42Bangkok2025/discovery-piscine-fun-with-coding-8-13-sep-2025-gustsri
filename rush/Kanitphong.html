@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanitphong Sricharoen - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        .fade-in-up:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .fade-in-up:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .fade-in-up:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .fade-in-up:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        /* Mobile menu toggle using CSS only */
+        .mobile-menu-toggle {
+            display: none;
+        }
+
+        .mobile-menu-toggle:checked+.mobile-menu-button .menu-icon {
+            transform: rotate(45deg);
+        }
+
+        .mobile-menu-toggle:checked+.mobile-menu-button .menu-icon::before {
+            transform: rotate(90deg);
+            top: 0;
+        }
+
+        .mobile-menu-toggle:checked+.mobile-menu-button .menu-icon::after {
+            transform: rotate(90deg);
+            bottom: 0;
+        }
+
+        .mobile-menu-toggle:checked~.mobile-menu {
+            display: block !important;
+        }
+
+        .menu-icon {
+            position: relative;
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: currentColor;
+            transition: all 0.3s ease;
+        }
+
+        .menu-icon::before,
+        .menu-icon::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 24px;
+            height: 2px;
+            background: currentColor;
+            transition: all 0.3s ease;
+        }
+
+        .menu-icon::before {
+            top: -8px;
+        }
+
+        .menu-icon::after {
+            bottom: -8px;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .scroll-animate.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        nav {
+            backdrop-filter: blur(20px);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-white text-gray-900 font-sans">
+
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md shadow-lg border-b">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="text-2xl font-bold gradient-text">
+                    <a href="index.html">Portfolio Showcase</a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html"
+                        class="nav-link text-gray-700 hover:text-purple-600 transition-colors duration-200 font-medium">Home</a>
+                    <a href="#about" class="nav-link text-purple-600 font-bold transition-colors duration-200">About
+                        Me</a>
+                    <a href="#showcase"
+                        class="nav-link text-gray-700 hover:text-purple-600 transition-colors duration-200 font-medium">My
+                        Work</a>
+                    <a href="#contact"
+                        class="nav-link text-gray-700 hover:text-purple-600 transition-colors duration-200 font-medium">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <input type="checkbox" id="mobile-menu-toggle" class="mobile-menu-toggle">
+                    <label for="mobile-menu-toggle"
+                        class="mobile-menu-button text-gray-700 hover:text-purple-600 cursor-pointer">
+                        <span class="menu-icon"></span>
+                    </label>
+
+                    <!-- Mobile Navigation Menu -->
+                    <div class="mobile-menu hidden absolute top-full left-0 right-0 bg-white shadow-lg border-t">
+                        <div class="px-4 py-4 space-y-2">
+                            <a href="index.html"
+                                class="block py-2 text-gray-700 hover:text-purple-600 transition-colors duration-200">Home</a>
+                            <a href="#about"
+                                class="block py-2 text-purple-600 font-bold transition-colors duration-200">About
+                                Me</a>
+                            <a href="#showcase"
+                                class="block py-2 text-gray-700 hover:text-purple-600 transition-colors duration-200">My
+                                Work</a>
+                            <a href="#contact"
+                                class="block py-2 text-gray-700 hover:text-purple-600 transition-colors duration-200">Contact</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section class="min-h-screen bg-white border-b border-gray-200 flex items-center">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="text-center fade-in-up">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight gradient-text">
+                    Kanitphong Sricharoen
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-gray-600 max-w-3xl mx-auto">
+                    If you need to know more about me please click learn about me !!
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#about"
+                        class="bg-purple-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-purple-700 transition-colors duration-200 shadow-lg">
+                        Learn About Me
+                    </a>
+                    <a href="#showcase"
+                        class="border-2 border-purple-600 text-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-purple-600 hover:text-white transition-colors duration-200">
+                        View My Work
+                    </a>
+                    <a href="index.html"
+                        class="border-2 border-gray-300 text-gray-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-300 hover:text-gray-800 transition-colors duration-200">
+                        ← Back to Selection
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">About Kanitphong</h2>
+                <div class="w-24 h-1 bg-blue-600 mx-auto"></div>
+            </div>
+
+            <!-- First Grid Row: Photo and Introduction -->
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+                <div class="fade-in-up">
+                    <div
+                        class="w-80 h-80 mx-auto bg-gradient-to-br from-blue-400 to-indigo-600 rounded-full flex items-center justify-center shadow-2xl">
+                        <div class="w-72 h-72 bg-white rounded-full flex items-center justify-center">
+                            <div class="text-6xl">
+                                <img src="/cell04//img/IMG_0028.JPG" alt="Kanitphong Sricharoen"
+                                    class="w-72 h-72 rounded-full object-cover">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fade-in-up">
+                    <h3 class="text-3xl font-bold text-gray-900 mb-6">Hi, I'm Kanitphong Sricharoen</h3>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        I have a strong interest in both Frontend and Backend development, as well as database design
+                        and management to build efficient and scalable systems. I am also passionate about learning new
+                        technologies, programming languages, and development methodologies to continuously improve and
+                        apply them effectively in my work.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Second Grid Row: Background Education and Hobbies-->
+            <div class="grid md:grid-cols-2 gap-12 items-start">
+                <div class="fade-in-up">
+                    <div class="bg-white p-6 rounded-lg shadow-sm border mb-6">
+                        <h3 class="text-3xl font-bold text-gray-900 mb-6">Background Education</h3>
+                        <ul class="list-disc list-inside text-lg text-gray-600 space-y-2">
+
+                            <h4 class="text-2xl font-bold text-gray-900 mt-8 mb-2">Higher Education</h4>
+                            <ul class="list-disc list-inside text-lg text-gray-600 space-y-2">
+                                <li>
+                                    <span class="font-semibold">2022 - Present:</span> Bachelor's Degree in Information
+                                    Technology at King Mongkut's Institute of Technology Ladkrabang (KMITL)
+                                </li>
+                                <li>
+                                    <span class="font-semibold">Bachelor's Degree:</span> Information Technology
+                                </li>
+                                <li>
+                                    <span class="font-semibold">Location:</span> Bangkok, Thailand
+                                </li>
+                            </ul>
+                            <h4 class="text-2xl font-bold text-gray-900 mt-8 mb-2">Secondary Education</h4>
+                            <ul class="list-disc list-inside text-lg text-gray-600 space-y-2">
+                                <li>
+                                    <span class="font-semibold">School:</span> Benchamarachutit School, Ratchaburi
+                                </li>
+                                <li>
+                                    Lower Secondary Education (Matthayom 1-3)
+                                </li>
+                                <li>
+                                    Upper Secondary Education (Matthayom 4-6)
+                                </li>
+                                <li>
+                                    <span class="font-semibold">Location:</span> Ratchaburi Province, Thailand
+                                </li>
+                            </ul>
+                    </div>
+
+
+                </div>
+
+                <div class="fade-in-up">
+                    <div class="bg-white p-6 rounded-lg shadow-sm border mb-6">
+                        <h3 class="text-3xl font-bold text-gray-900 mb-6">My Favorite Hobbies</h3>
+                        <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                            <div>
+                                 <ul class="list-disc list-inside text-lg text-gray-600 space-y-2">
+                            <li>
+                                <span class="font-semibold">Watching animes</span>
+                            </li>
+                            <li>
+                                <span class="font-semibold">Playing games</span>
+                            </li>
+                            <li>
+                                <span class="font-semibold">Traveling</span>
+                            </li>
+                            <li>
+                                <span class="font-semibold">Exercising</span>
+                            </li>
+                            <li>
+                                <span class="font-semibold">hanging out with friends.</span>
+                            </li>
+                            <li>
+                                <span class="font-semibold">Exercising</span>
+                            </li>
+                        </ul>
+                            </div>
+                            <br>
+                        <h3 class="text-3xl font-bold text-gray-900 mb-6">Activities</h3>
+                        <div>
+                            <h5 class="text-lg font-semibold text-gray-900">Staff of Academic Team, Pre-Programming 65
+                            </h5>
+                            <p class="text-gray-600">Teaching Director | IT KMITL | May 2023 - April 2023</p>
+                            <p class="text-gray-600 text-sm mt-1">Developed and delivered Basic Python programming
+                                instruction materials for incoming students</p>
+                        </div>
+                    </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Showcase Section -->
+    <section id="showcase" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Showcase</h2>
+                <div class="w-32 h-1 bg-blue-600 mx-auto"></div>
+                <br>
+
+                <h3 class="text-3xl font-bold text-gray-900 mb-6">My Skills</h3>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white p-4 rounded-lg shadow-sm border hover-lift">
+                        <h4 class="font-semibold text-gray-900 mb-2">Programming Languages</h4>
+                        <p class="text-gray-600 mb-2"><span class="font-semibold text-green-600">Proficient:</span>
+                            SQL , Python</p>
+                        <p class="text-gray-600 mb-2"><span class="font-semibold text-blue-600">Intermediate:</span>
+                            PHP</p>
+                        <p class="text-gray-600"><span class="font-semibold text-orange-600">Beginner:</span>
+                            TypeScript, JavaScript, C</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm border hover-lift">
+                        <h4 class="font-semibold text-gray-900 mb-2">Web Development</h4>
+                        <p class="text-gray-600 mb-2"><span class="font-semibold text-green-600">Proficient:</span>
+                            Bootstrap, HTML, CSS</p>
+                        <p class="text-gray-600 mb-2"><span class="font-semibold text-blue-600">Intermediate:</span>
+                            Django, Tailwind</p>
+                        <p class="text-gray-600"><span class="font-semibold text-orange-600">Beginner:</span>
+                            React, Next.js</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm border hover-lift">
+                        <h4 class="font-semibold text-gray-900 mb-2">Tools & Platforms</h4>
+                        <p class="text-gray-600 mb-2"><span class="font-semibold text-green-600">Proficient:</span>
+                            Postman</p>
+                        <p class="text-gray-600 mb-2"><span class="font-semibold text-blue-600">Intermediate:</span>
+                            GitHub, Prisma</p>
+                        <p class="text-gray-600"><span class="font-semibold text-orange-600">Beginner:</span>
+                            Docker, Figma, AWS, Node.js</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm border hover-lift">
+                        <h4 class="font-semibold text-gray-900 mb-2">Database Management</h4>
+                        <p class="text-gray-600 mb-2"><span class="font-semibold text-green-600">Proficient:</span>
+                            PostgreSQL</p>
+                        <p class="text-gray-600 mb-2"><span class="font-semibold text-blue-600">Intermediate:</span>
+                            MySQL</p>
+                        <p class="text-gray-600"><span class="font-semibold text-orange-600">Beginner:</span>
+                            MongoDB(NoSQL), MariaDB</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-3xl text-center font-bold text-gray-900 mb-6">My Mini Projects</h3>
+            <div class="grid md:grid-cols-3 gap-8">
+
+                <div
+                    class="bg-gray-50 border border-gray-200 p-8 rounded-xl hover-lift transition-shadow duration-300 fade-in-up">
+
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Game-Vault</h3>
+                    <p class="text-gray-600 mb-4">A web platform for displaying game-related information, individual
+                        game details, user accounts, and a commenting system for discussing games. Developed using
+                        React, Next.js, TypeScript, Tailwind CSS, and Prisma, with external APIs integrated to fetch and
+                        display game data.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">React</span>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Next.js</span>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">TypeScript</span>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Tailwind CSS</span>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Prisma</span>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-gray-50 border border-gray-200 p-8 rounded-xl hover-lift transition-shadow duration-300 fade-in-up">
+
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Accounting and Store Management System</h3>
+                    <p class="text-gray-600 mb-4">A system for managing store inventory and employee accounts. The
+                        project was developed from scratch, starting with requirements gathering, analysis, and creating
+                        use cases. Developed using Django and PostgreSQL.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Django</span>
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">PostgreSQL</span>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-gray-50 border border-gray-200 p-8 rounded-xl hover-lift transition-shadow duration-300 fade-in-up">
+
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">U_sa_bai</h3>
+                    <p class="text-gray-600 mb-4">A dormitory management system that handles room reservations, rent
+                        payments (including water and electricity bills), and service requests such as maintenance,
+                        cleaning, or lodging complaints. The system is designed to enhance convenience for tenants and
+                        administrators. Developed using Laravel and NoSQL.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Laravel</span>
+                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">NoSQL</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Contact Kanitphong</h2>
+                <div class="w-24 h-1 bg-blue-600 mx-auto"></div>
+            </div>
+
+            <div class="max-w-2xl mx-auto text-center">
+                <div class="grid md:grid-cols-4 gap-8">
+                    <div class="text-center fade-in-up hover-lift">
+                        <div class="w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <div class="text-2xl"><img src="/cell04/img/email.png" alt="Email" class="w-10 h-10"></div>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">Email</h4>
+                        <a href="mailto:gustsri@email.com"
+                            class="text-blue-600 hover:text-blue-800">gustsri@email.com</a>
+                    </div>
+
+                    <div class="text-center fade-in-up hover-lift">
+                        <div class="w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <div class="text-2xl"><img src="/cell04/img/facebook.svg" alt="Facebook" class="w-10 h-10">
+                            </div>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">Facebook</h4>
+                        <a href="https://web.facebook.com/gus.kanitphong.sricharoen"
+                            class="text-blue-600 hover:text-blue-800">kanitphong Sricharoen</a>
+                    </div>
+
+                    <div class="text-center fade-in-up hover-lift">
+                        <div class="w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <div class="text-2xl"><img src="/cell04/img/Github.png" alt="GitHub" class="w-10 h-10">
+                            </div>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">GitHub</h4>
+                        <a href="https://github.com/gustsri" class="text-blue-600 hover:text-blue-800">gustsri</a>
+                    </div>
+
+                    <div class="text-center fade-in-up hover-lift">
+                        <div class="w-32 h-16 flex items-center justify-center mx-auto mb-4">
+                            <div class="text-2xl"><img src="/cell04/img/IG.png" alt="Instagram" class="w-10 h-10"></div>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-2">Instagram</h4>
+                        <a href="https://www.instagram.com/ag.niphong/"
+                            class="text-blue-600 hover:text-blue-800">ag.niphong</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

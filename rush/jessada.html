@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jessada Taengsuwan - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Staggered animation delays */
+        .fade-in-up:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .fade-in-up:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .fade-in-up:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .fade-in-up:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        /* Mobile menu toggle using CSS only */
+        .mobile-menu-toggle {
+            display: none;
+        }
+
+        .mobile-menu-toggle:checked+.mobile-menu-button .menu-icon {
+            transform: rotate(45deg);
+        }
+
+        .mobile-menu-toggle:checked+.mobile-menu-button .menu-icon::before {
+            transform: rotate(90deg);
+            top: 0;
+        }
+
+        .mobile-menu-toggle:checked+.mobile-menu-button .menu-icon::after {
+            transform: rotate(90deg);
+            bottom: 0;
+        }
+
+        .mobile-menu-toggle:checked~.mobile-menu {
+            display: block !important;
+        }
+
+        .menu-icon {
+            position: relative;
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: currentColor;
+            transition: all 0.3s ease;
+        }
+
+        .menu-icon::before,
+        .menu-icon::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 24px;
+            height: 2px;
+            background: currentColor;
+            transition: all 0.3s ease;
+        }
+
+        .menu-icon::before {
+            top: -8px;
+        }
+
+        .menu-icon::after {
+            bottom: -8px;
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Scroll-triggered animations using intersection observer via CSS */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .scroll-animate.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Navigation background change on scroll - using backdrop-filter */
+        nav {
+            backdrop-filter: blur(20px);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Hover effects */
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Parallax effect */
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+
+        /* Dark overlay and blur effect for parallax background */
+        .parallax::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(1.7px);
+            z-index: 1;
+        }
+
+        /* Ensure content stays above overlay */
+        .parallax > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Mobile fallback - disable parallax on mobile for performance */
+        @media (max-width: 768px) {
+            .parallax {
+                background-attachment: scroll;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-white text-gray-900 font-sans">
+
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md shadow-lg border-b">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="text-2xl font-bold gradient-text">
+                    <a href="index.html">Portfolio Showcase</a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html"
+                        class="nav-link text-gray-700 hover:text-purple-600 transition-colors duration-200 font-medium">Home</a>
+                    <a href="#about" class="nav-link text-purple-600 font-bold transition-colors duration-200">About
+                        Me</a>
+                    <a href="#showcase"
+                        class="nav-link text-gray-700 hover:text-purple-600 transition-colors duration-200 font-medium">My
+                        Work</a>
+                    <a href="#contact"
+                        class="nav-link text-gray-700 hover:text-purple-600 transition-colors duration-200 font-medium">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <input type="checkbox" id="mobile-menu-toggle" class="mobile-menu-toggle">
+                    <label for="mobile-menu-toggle"
+                        class="mobile-menu-button text-gray-700 hover:text-purple-600 cursor-pointer">
+                        <span class="menu-icon"></span>
+                    </label>
+
+                    <!-- Mobile Navigation Menu -->
+                    <div class="mobile-menu hidden absolute top-full left-0 right-0 bg-white shadow-lg border-t">
+                        <div class="px-4 py-4 space-y-2">
+                            <a href="index.html"
+                                class="block py-2 text-gray-700 hover:text-purple-600 transition-colors duration-200">Home</a>
+                            <a href="#about"
+                                class="block py-2 text-purple-600 font-bold transition-colors duration-200">About
+                                Me</a>
+                            <a href="#showcase"
+                                class="block py-2 text-gray-700 hover:text-purple-600 transition-colors duration-200">My
+                                Work</a>
+                            <a href="#contact"
+                                class="block py-2 text-gray-700 hover:text-purple-600 transition-colors duration-200">Contact</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section class="min-h-screen border-b border-gray-200 flex items-center bg-[url('./img/star.jpg')] parallax">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+            <div class="text-center fade-in-up">
+                <h1 class="text-5xl md:text-7xl font-bold mb-3 pb-4 leading-tight text-white">
+                    Jessada Taengsuwan
+                </h1>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#about"
+                        class="bg-purple-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-purple-700 transition-colors duration-200 shadow-lg">
+                        Learn About Me
+                    </a>
+                    <a href="#showcase"
+                        class="border-2 border-purple-600 bg-purple-100 text-purple-600 px-8 py-3 rounded-full font-semibold hover:bg-purple-600 hover:text-white transition-colors duration-200">
+                        View My Work
+                    </a>
+                    <a href="index.html"
+                        class="border-2 border-white/70 bg-white/10 text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-gray-800 transition-colors duration-200 backdrop-blur-sm">
+                        ← Back to Selection
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">About Jessada</h2>
+                <div class="w-24 h-1 bg-blue-600 mx-auto"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+                <div class="fade-in-up">
+                    <div
+                        class="w-80 h-80 mx-auto bg-gradient-to-br from-blue-400 to-indigo-600 rounded-full flex items-center justify-center shadow-2xl">
+                        <div class="w-72 h-72 bg-white rounded-full flex items-center justify-center">
+                            <div class="text-6xl">
+                                <img src="./img/Jessada_profile.jpg" alt="Jessada Taengsuwan"
+                                    class="w-72 h-72 rounded-full object-cover">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fade-in-up">
+                    <h3 class="text-3xl font-bold text-gray-900 mb-6">Hi, I'm Jessada Taengsuwan</h3>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        Forth-year Information Technology student specializing in Networking, Virtualization, and Cybersecurity. Possesses
+                        hands-on experience configuring Cisco devices, implementing network automation (Ansible, Netmiko, Paramiko),
+                        utilizing security/monitoring tools (Fortigate, Grafana, Prometheus, Wireshark, Nmap), and managing VMware
+                        environments (ESXi, vCenter).
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="flex flex-wrap gap-8 justify-center mb-16">
+                <div class="fade-in-up">
+                    <h3 class="text-3xl font-bold text-gray-900 mb-6">Education & Experience</h3>
+                    
+                    <h4 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Education</h4>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border mb-6">
+                        <h5 class="text-xl font-semibold text-gray-900 mb-2">King Mongkut's Institute of Technology Ladkrabang (KMITL)</h5>
+                        <p class="text-lg text-gray-700 mb-2"><span class="font-semibold">Bachelor of Science in Computer Science</span> | 2022 - Present</p>
+                        <p class="text-gray-600 mb-2"><span class="font-semibold">GPA:</span> 3.75</p>
+                        <p class="text-gray-600 mb-2"><span class="font-semibold">Relevant Coursework:</span></p>
+                        <ul class="list-disc list-inside text-gray-600 ml-4">
+                            <li>Communication Network Infrastructure</li>
+                            <li>Infrastructure Systems And Services</li>
+                            <li>Computer Organization And Operating System</li>
+                            <li>Cloud Computing</li>
+                            <li>Information Technology Infrastructure Security</li>
+                            <li>Information Network Design</li>
+                        </ul>
+                    </div>
+
+                    <h4 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Teaching Experience</h4>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border mb-6">
+                        <h5 class="text-xl font-semibold text-gray-900 mb-2">Teaching Assistant</h5>
+                        <p class="text-lg text-gray-700 mb-2">School of Information Technology, KMITL | 2023 - 2025</p>
+                        <p class="text-gray-600 mb-4">
+                            Provided academic support and guidance to undergraduate students in Information Technology courses, 
+                            helping with assignments and facilitating deeper understanding of course material. 
+                            Facilitated practical lab sessions and troubleshooted technical issues.
+                        </p>
+                        <p class="text-gray-600 mb-2"><span class="font-semibold">Courses Assisted:</span></p>
+                        <ul class="list-disc list-inside text-gray-600 ml-4">
+                            <li>2024/2 Communication Network Infrastructure</li>
+                            <li>2024/2 Fundamental Web Programming</li>
+                            <li>2024/1 Database System Concepts</li>
+                            <li>2023/1 Information Technology Fundamentals</li>
+                        </ul>
+                    </div>
+
+                    <h4 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Awards & Activities</h4>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border">
+                        <div class="mb-4">
+                            <h5 class="text-lg font-semibold text-gray-900">Huawei ICT Competition 2024-2025 Thailand</h5>
+                            <p class="text-gray-600">9th place out of 64+ teams in national preliminary round (Cloud Computing) | Nov 2024</p>
+                        </div>
+                        <div>
+                            <h5 class="text-lg font-semibold text-gray-900">Staff of Academic Team, Pre-Programming 65</h5>
+                            <p class="text-gray-600">Teaching Director | IT KMITL | May 2023 - April 2023</p>
+                            <p class="text-gray-600 text-sm mt-1">Developed and delivered Basic Python programming instruction materials for incoming students</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fade-in-up">
+                    <h3 class="text-3xl font-bold text-gray-900 mb-6">Projects & Technical Skills</h3>
+                    
+                    <h4 class="text-2xl font-bold text-gray-900 mb-4">Key Projects</h4>
+                    <div class="space-y-4 mb-8">
+                        <div class="bg-white p-4 rounded-lg shadow-sm border">
+                            <h5 class="text-lg font-semibold text-gray-900 mb-2">Network Grader Automation</h5>
+                            <p class="text-gray-600 text-sm mb-2">Nov 2024</p>
+                            <p class="text-gray-600 mb-2">
+                                Developed an automated network grading system for Cisco Modeling Lab (CML) environments, 
+                                significantly reducing grading time by automatically evaluating lab configurations.
+                            </p>
+                            <p class="text-sm text-blue-600"><span class="font-semibold">Tech Stack:</span> Nuxt.js (Vue.js 3), MongoDB, Bun/ElysiaJS, Cisco Modeling Labs</p>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-lg shadow-sm border">
+                            <h5 class="text-lg font-semibold text-gray-900 mb-2">Learnlab - Online Learning Platform</h5>
+                            <p class="text-gray-600 text-sm mb-2">2023 - 2024</p>
+                            <p class="text-gray-600 mb-2">
+                                Developed back-end services for an online learning platform, enabling core LMS features 
+                                including user roles, course management, assignments, and quizzes.
+                            </p>
+                            <p class="text-sm text-blue-600"><span class="font-semibold">Tech Stack:</span> Nuxt.js (Vue.js 3), MariaDB, PHP</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Showcase Section -->
+    <section id="showcase" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Showcase</h2>
+                <div class="w-32 h-1 bg-blue-600 mx-auto"></div>
+                <br>
+
+                <h3 class="text-3xl font-bold text-gray-900 mb-6">Technical Skills</h3>
+
+                <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="bg-white p-4 rounded-lg shadow-sm border hover-lift">
+                        <h4 class="font-semibold text-gray-900 mb-2">Programming Languages</h4>
+                        <p class="text-gray-600 mb-2"><span class="font-semibold text-green-600">Proficient:</span> Python, SQL</p>
+                        <p class="text-gray-600 mb-2"><span class="font-semibold text-blue-600">Intermediate:</span> JavaScript</p>
+                        <p class="text-gray-600"><span class="font-semibold text-orange-600">Beginner:</span> TypeScript, Java, C</p>
+                    </div>
+                    
+                    
+                    
+                    <div class="bg-white p-4 rounded-lg shadow-sm border hover-lift">
+                        <h4 class="font-semibold text-gray-900 mb-2">Databases</h4>
+                        <p class="text-gray-600 mb-2"><span class="font-semibold text-blue-600">Intermediate:</span> MariaDB, MySQL</p>
+                        <p class="text-gray-600"><span class="font-semibold text-orange-600">Beginner:</span> PostgreSQL</p>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg shadow-sm border hover-lift">
+                        <h4 class="font-semibold text-gray-900 mb-2">DevOps & Infrastructure</h4>
+                        <p class="text-gray-600 mb-2"><span class="font-semibold text-green-600">Proficient:</span> Git</p>
+                        <p class="text-gray-600 mb-2"><span class="font-semibold text-blue-600">Intermediate:</span> Linux CLI</p>
+                        <p class="text-gray-600"><span class="font-semibold text-orange-600">Beginner:</span> Docker, AWS Cloud</p>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg shadow-sm border hover-lift">
+                        <h4 class="font-semibold text-gray-900 mb-2">Networking & Virtualization</h4>
+                        <p class="text-gray-600 mb-2"><span class="font-semibold text-blue-600">Intermediate:</span> Cisco IOS, VMware ESXi/Workstation, GNS3</p>
+                        <p class="text-gray-600"><span class="font-semibold text-orange-600">Beginner:</span> Ansible, Netmiko, TextFSM</p>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg shadow-sm border hover-lift">
+                        <h4 class="font-semibold text-gray-900 mb-2">Security & Monitoring</h4>
+                        <p class="text-gray-600"><span class="font-semibold text-orange-600">Beginner:</span> Fortigate NGFW, Snort, Wireshark, Prometheus, Grafana</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-3xl text-center font-bold text-gray-900 mb-6">Areas of Expertise</h3>
+            <div class="flex flex-col md:flex-row gap-8 justify-center">
+
+                <div
+                    class="bg-gray-50 border border-gray-200 p-8 rounded-xl hover-lift transition-shadow duration-300 fade-in-up flex-1 max-w-md">
+                    <div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
+                        <div class="text-3xl">🌐</div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Network Infrastructure</h3>
+                    <p class="text-gray-600 mb-4">Experience with Cisco technologies, network automation, and infrastructure design.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Cisco IOS</span>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Network Automation</span>
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">VMware</span>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-gray-50 border border-gray-200 p-8 rounded-xl hover-lift transition-shadow duration-300 fade-in-up flex-1 max-w-md">
+                    <div class="w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
+                        <div class="text-3xl">🎓</div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Teaching & Mentoring</h3>
+                    <p class="text-gray-600 mb-4">Experience as Teaching Assistant in multiple IT courses and academic program development.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Database Systems</span>
+                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Web Programming</span>
+                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Networking</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Contact Jessada</h2>
+                <div class="w-24 h-1 bg-blue-600 mx-auto"></div>
+            </div>
+
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="flex flex-col sm:flex-row flex-wrap gap-6 justify-center items-stretch">
+                    <div class="text-center fade-in-up hover-lift flex-1 min-w-[100x] max-w-[300px] bg-white p-6 rounded-lg shadow-sm border text-nowrap">
+                        <div class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-blue-50 rounded-full">
+                            <div class="text-2xl"><img src="./img/email.png" alt="Email" class="w-8 h-8"></div>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-3">Email</h4>
+                        <a href="mailto:jessadataensuwan@gmail.com"
+                            class="text-blue-600 hover:text-blue-800 text-sm break-all">jessadataensuwan@gmail.com</a>
+                    </div>
+
+                    <div class="text-center fade-in-up hover-lift flex-1 min-w-[100x] max-w-[300px] bg-white p-6 rounded-lg shadow-sm border">
+                        <div class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-blue-50 rounded-full">
+                            <div class="text-2xl"><img src="./img/facebook.svg" alt="Facebook" class="w-8 h-8"></div>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-3">Facebook</h4>
+                        <a href="https://www.facebook.com/tar.jessada.2025"
+                            class="text-blue-600 hover:text-blue-800">Tar Jessada</a>
+                    </div>
+
+                    <div class="text-center fade-in-up hover-lift flex-1 min-w-[100x] max-w-[300px] bg-white p-6 rounded-lg shadow-sm border">
+                        <div class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-blue-50 rounded-full">
+                            <div class="text-2xl"><img src="./img/Github.png" alt="GitHub" class="w-8 h-8"></div>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-3">GitHub</h4>
+                        <a href="https://github.com/NitruZx" class="text-blue-600 hover:text-blue-800">NitruZx</a>
+                    </div>
+
+                    <div class="text-center fade-in-up hover-lift flex-1 min-w-[100x] max-w-[300px] bg-white p-6 rounded-lg shadow-sm border">
+                        <div class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-blue-50 rounded-full">
+                            <div class="text-2xl"><img src="./img/IG.png" alt="Instagram" class="w-8 h-8"></div>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-3">Instagram</h4>
+                        <a href="https://www.instagram.com/tarj.essada/"
+                            class="text-blue-600 hover:text-blue-800">tarj.essada</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
